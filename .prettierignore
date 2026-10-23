@@ -1,0 +1,14 @@
+# See https://git-scm.com/docs/gitignore for more about ignoring files.
+
+# dependencies
+node_modules/
+pnpm-lock.yaml
+
+# build
+build/
+dist/
+dist-offline/
+out/
+
+# static assets
+public/

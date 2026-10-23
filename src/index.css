@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Barlow Semi Condensed";
+  font-weight: 700;
+  font-display: swap;
+  src: url("./assets/fonts/barlow-semi-condensed-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow Semi Condensed";
+  font-weight: 800;
+  font-display: swap;
+  src: url("./assets/fonts/barlow-semi-condensed-800.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("./assets/fonts/inter-variable.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Martian Mono";
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("./assets/fonts/martian-mono-variable.woff2") format("woff2");
+}
+
+/* Theme - Hacktoberfest 2026 brand tokens https://hacktoberfest.com/brand */
+@theme {
+  --color-forest: #3d5f58;
+  --color-deep-forest: #2e4742;
+  --color-ink: #231f20;
+  --color-paper: #f2f2eb;
+  --color-sky: #8bb2de;
+  --color-ochre: #f5b726;
+  --color-pink: #e97b77;
+  --color-orange: #e53927;
+  --color-maroon: #671912;
+
+  --color-panel: #2c403c;
+  --color-panel-soft: #34514b;
+
+  --font-display:
+    "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-micro: 1.05rem;
+  --text-overline: 1.25rem;
+  --text-caption: 1.5rem;
+  --text-body: 1.8rem;
+  --text-lead: 2.2rem;
+  --text-subtitle: 2.7rem;
+  --text-title: 3.2rem;
+  --text-headline-xs: 4.6rem;
+  --text-headline-sm: 5.8rem;
+  --text-headline: 7.6rem;
+  --text-display: 13rem;
+  --text-display--line-height: 0.88;
+
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  --animate-breathe: breathe 1.6s ease-in-out infinite;
+  --animate-fade-swap: fade-swap 500ms ease;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 1.5rem transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+@keyframes breathe {
+  50% {
+    opacity: 0.55;
+  }
+}
+@keyframes fade-swap {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+}
+
+@layer base {
+  html {
+    font-size: 1.1vh;
+    background: var(--color-forest);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--color-paper);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    cursor: none;
+  }
+
+  body.show-cursor {
+    cursor: default;
+  }
+
+  /* Phase accent. */
+  [data-type] {
+    --accent-soft: color-mix(in srgb, var(--accent) 16%, transparent);
+    --accent-chip: color-mix(in srgb, var(--accent) 22%, transparent);
+    --accent-glow: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+  [data-type="talk"] {
+    --accent: var(--color-sky);
+  }
+  [data-type="sprint"] {
+    --accent: var(--color-ochre);
+  }
+  [data-type="break"] {
+    --accent: var(--color-pink);
+  }
+  [data-type="ceremony"] {
+    --accent: var(--color-orange);
+  }
+  [data-type="logistics"] {
+    --accent: var(--color-paper);
+  }
+}
+
+@layer components {
+  .stage-surface {
+    background:
+      radial-gradient(
+        120% 140% at 0% 0%,
+        var(--accent-glow) 0%,
+        transparent 60%
+      ),
+      var(--color-panel);
+    box-shadow: inset 0 0 0 1px
+      color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .hint {
+    opacity: 0;
+  }
+  body.show-cursor .hint {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-aspect-ratio: 1/1), (max-width: 900px) {
+  html {
+    font-size: max(1.1vh, 7px);
+  }
+  body {
+    overflow: auto;
+    cursor: default;
+  }
+
+  .board {
+    height: auto;
+    min-height: 100vh;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+  .board > * {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .board > aside > ol {
+    overflow: visible;
+  }
+}

@@ -1,0 +1,26 @@
+# See https://git-scm.com/docs/gitignore for more about ignoring files.
+
+# misc
+.DS_Store
+Thumbs.db
+
+# certificates
+*.pem
+
+# debug files
+*.log
+
+# local env files
+.env*.local
+
+# dependencies
+node_modules/
+
+# typescript
+*.tsbuildinfo
+
+# build
+build/
+dist/
+dist-offline/
+out/
