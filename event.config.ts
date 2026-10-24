@@ -78,7 +78,7 @@ export const EVENT_CONFIG = {
     {
       icon: "wifi",
       label: "WiFi",
-      value: "H-FARM Guest",
+      value: "H-GUEST",
       hint: "open network, no password",
     },
     {
